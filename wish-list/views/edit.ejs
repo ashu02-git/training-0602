@@ -3,25 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WishList</title>
+        <title>EditWishList</title>
     </head>
     <body>
         <h1><%= title %></h1>
 
-        <div>
+        <form method="POST" action="/wishlist/update/<%= data.id%>">
             <label for="id">ID</label>
-            <input type="text" name="id" id="id" value="<%= mydata.id %>" disabled>
+            <input type="text" name="id" id="id" value="<%= data.id %>" disabled>
             <label for="wish">やりたいこと</label>
-            <input type="text" name="wish" id="wish" value="<%= mydata.wish %>">
+            <input type="text" name="wish" id="wish" value="<%= data.wish %>">
             <label for="memo">詳細</label>
-            <input type="text" name="memo" id="memo" value="<%= mydata.memo %>">
+            <input type="text" name="memo" id="memo" value="<%= data.memo %>">
             <label for="finished">いつまでに</label>
-            <input type="text" name="finished" id="finished" value="<%= mydata.finished %>">
+            <input type="text" name="finished" id="finished" value="<%= data.finished %>"><br>
             
-            <input type="button" value="保存" onclick="updateWish(`<%=mydata.id%>`)" >
-        
-            <button class="cancel-btn">キャンセル</button>
-            <input type="button" value="削除" onclick="deleteWish(`<%=mydata.id%>`)" >
-        </div>
+            <button class="edit-btn">更新</button>
+            <!-- <button type=“button” onclick="location.href='/'">戻る</button> -->
+            <!-- <button class="cancel-btn">キャンセル</button> -->
+       </form>
     </body>
 </html>

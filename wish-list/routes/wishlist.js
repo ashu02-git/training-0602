@@ -19,13 +19,6 @@ router.get('/',(req, res, next)=> {
     });
 });
 
-// /* get add page */
-// router.get('/add', (req,res, next) => {
-//   var data = {
-
-//   }
-// });
-
 /* search */
 router.get('/search',(req, res, next)=> {
   const keyword = req.query
@@ -69,6 +62,36 @@ router.get('/delete/:id',(req, res)=>{
   const id = req.params.id
   db.serialize(()=>{
     db.exec(`DELETE from wishlist WHERE id = "${id}"`, (stat, err)=>{
+      res.redirect('/wishlist');
+    });
+  });
+});
+
+/* edit */ 
+router.get('/edit/:id',(req, res)=>{
+  const id = req.params.id
+  db.serialize(()=>{
+    db.get('SELECT * from wishlist WHERE id = ?', [id], (err, rows)=>{
+      if(!err){
+        var data={
+          title: " Edit Wish List",
+          data: rows
+        };
+        res.render('edit', data);
+      }
+    });
+  });
+});
+
+router.post('/update/:id',(req, res, next)=>{
+  const id = req.params.id
+  var wish = req.body.wish;
+  var memo = req.body.memo;
+  var finished = req.body.finished;
+  console.log(id);
+  
+  db.serialize(()=>{
+    db.exec(`update wishlist set wish="${wish}", memo="${memo}", finished="${finished}" where id="${id}"`, (stat, err)=>{
       res.redirect('/wishlist');
     });
   });
