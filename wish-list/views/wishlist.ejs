@@ -7,6 +7,11 @@
     </head>
     <body>
         <h1><%= title %></h1>
+            <form method="get" action="/wishlist/search">
+                <label for="search"></label>
+                <input type="text" name="wish" id="search">
+                <button class="search-btn">検索</button>
+            </form>
             <table class="table">
                 <tr>
                     <th>id</th>
