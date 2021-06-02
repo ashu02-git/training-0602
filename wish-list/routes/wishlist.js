@@ -18,6 +18,13 @@ router.get('/',(req, res, next)=> {
     });
 });
 
+// /* get add page */
+// router.get('/add', (req,res, next) => {
+//   var data = {
+
+//   }
+// });
+
 /* search */
 router.get('/search',(req, res, next)=> {
   const keyword = req.query
@@ -33,5 +40,28 @@ router.get('/search',(req, res, next)=> {
     });
   });
 });
+
+/* GET add page. */
+router.get('/add',(req, res, next)=> {
+  var data={
+    title: "Add Wish List"
+  };
+  res.render('add', data); 
+});
+
+/* post */
+router.post('/',(req, res, next)=> {
+
+  var wish = req.body.wish;
+  var memo = req.body.memo;
+  var finished = req.body.finished;
+
+  db.serialize(()=>{
+    db.exec(`insert into wishlist (wish, memo, finished) values("${wish}","${memo}","${finished}")`, (stat, error)=>{
+      res.redirect('/wishlist');
+    });
+  });
+});
+
 
 module.exports = router;
