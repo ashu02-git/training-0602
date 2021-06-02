@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var sqlight3 = require('sqlite3');
+const { route } = require('./users');
 const db = new sqlight3.Database('wishlist.db');
 
 /* GET wishlist */
@@ -62,6 +63,18 @@ router.post('/',(req, res, next)=> {
     });
   });
 });
+
+/* delete */
+router.get('/delete/:id',(req, res)=>{
+  const id = req.params.id
+  db.serialize(()=>{
+    db.exec(`DELETE from wishlist WHERE id = "${id}"`, (stat, err)=>{
+      res.redirect('/wishlist');
+    });
+  });
+});
+
+
 
 
 module.exports = router;

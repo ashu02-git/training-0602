@@ -31,9 +31,10 @@
                     <td class="memo"><%= obj.memo %></td>
                     <td class="created"><%= obj.created %></td>
                     <td class="finished"><%= obj.finished %></td>
+                    <td><a href="/wishlist/edit/<%= obj.id%>">編集</a></td>
+                    <td><a href="/wishlist/delete/<%= obj.id%>">削除</a></td>
                 </tr> 
                 <% } %>
-
         </table>
     </body>
 </html>
